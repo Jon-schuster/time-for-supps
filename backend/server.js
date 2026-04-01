@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import authRoutes from './routes/authRoutes.js';
 
 // Lädt die Umgebungsvariablen aus der .env Datei
 dotenv.config();
@@ -20,6 +21,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Time For Supps API is running');
 });
+
+// Authentifizierungs-Route für URL '/api/auth'
+app.use('/api/auth', authRoutes);
 
 // --- DATENBANK & SERVER START ---
 mongoose.connect(process.env.MONGO_URI)
